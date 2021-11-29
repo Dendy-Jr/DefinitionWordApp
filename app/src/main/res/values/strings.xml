@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">DefinitionWordTestApp</string>
+    <string name="please_wait">Please Wait…</string>
+    <string name="loading_progress">Loading…</string>
+    <string name="no_connection_message">No connection</string>
+    <string name="timeout_error">Long connection with server</string>
+    <string name="null_error">Your value is empty or invalid</string>
+    <string name="not_correctly_entered_word_error">Not correctly entered word</string>
+    <string name="enter_the_word">Enter the word</string>
+    <string name="word">word:</string>
+    <string name="phonetic">phonetic:</string>
+    <string name="origin">origin:</string>
+    <string name="example">example:</string>
+    <string name="definition">definition:</string>
+    <string name="partofspeech">partOfSpeech:</string>
+    <string name="meanings">Meanings</string>
+    <string name="synonyms">synonyms:</string>
+    <string name="antonyms">antonyms:</string>
+    <string name="search">Search</string>
 </resources>
