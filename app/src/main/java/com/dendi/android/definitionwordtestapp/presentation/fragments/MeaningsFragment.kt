@@ -1,37 +1,27 @@
 package com.dendi.android.definitionwordtestapp.presentation.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.dendi.android.definitionwordtestapp.presentation.core.ClickListener
 import com.dendi.android.definitionwordtestapp.core.navigator
 import com.dendi.android.definitionwordtestapp.databinding.MeaningsFragmentBinding
 import com.dendi.android.definitionwordtestapp.presentation.UiDefinition
 import com.dendi.android.definitionwordtestapp.presentation.UiMeaning
 import com.dendi.android.definitionwordtestapp.presentation.adapter.MeaningAdapter
+import com.dendi.android.definitionwordtestapp.presentation.core.BaseFragment
 
 /**
  * @author Dendy-Jr on 30.11.2021
  * olehvynnytskyi@gmail.com
  */
-class MeaningsFragment : Fragment() {
+class MeaningsFragment : BaseFragment<MeaningsFragmentBinding>(MeaningsFragmentBinding::inflate) {
 
-    private var _binding: MeaningsFragmentBinding? = null
-    private val binding get() = _binding!!
-
+    override fun setRecyclerView() = viewBinding.rcViewMeanings
     private lateinit var meaningAdapter: MeaningAdapter
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = MeaningsFragmentBinding.inflate(inflater, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         meaningAdapter = MeaningAdapter(object : ClickListener<List<UiDefinition.Base>> {
             override fun click(item: List<UiDefinition.Base>) {
@@ -41,7 +31,7 @@ class MeaningsFragment : Fragment() {
                 navigator().launchFragment(fragment)
             }
         })
-
+        setAdapter(meaningAdapter)
 
         val bundle: Bundle? = this.arguments
         if (arguments != null) {
@@ -50,27 +40,5 @@ class MeaningsFragment : Fragment() {
                 meaningAdapter.map(meaning)
             }
         }
-
-        setupWordRecyclerView()
-        return binding.root
-    }
-
-    private fun setupWordRecyclerView() {
-        with(binding.rcViewMeanings) {
-            adapter = meaningAdapter
-            layoutManager = LinearLayoutManager(requireContext())
-            setHasFixedSize(true)
-            addItemDecoration(
-                DividerItemDecoration(
-                    requireContext(),
-                    androidx.recyclerview.widget.DividerItemDecoration.VERTICAL
-                )
-            )
-        }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

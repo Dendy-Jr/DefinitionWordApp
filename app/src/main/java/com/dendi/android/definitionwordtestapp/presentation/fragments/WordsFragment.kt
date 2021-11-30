@@ -3,16 +3,11 @@ package com.dendi.android.definitionwordtestapp.presentation.fragments
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.dendi.android.definitionwordtestapp.presentation.core.ClickListener
 import com.dendi.android.definitionwordtestapp.core.WordApp
 import com.dendi.android.definitionwordtestapp.core.navigator
@@ -21,16 +16,16 @@ import com.dendi.android.definitionwordtestapp.presentation.UiMeaning
 import com.dendi.android.definitionwordtestapp.presentation.WordsViewModel
 import com.dendi.android.definitionwordtestapp.presentation.WordsViewModelFactory
 import com.dendi.android.definitionwordtestapp.presentation.adapter.WordsAdapter
+import com.dendi.android.definitionwordtestapp.presentation.core.BaseFragment
 import javax.inject.Inject
 
 /**
  * @author Dendy-Jr on 28.11.2021
  * olehvynnytskyi@gmail.com
  */
-class WordsFragment : Fragment() {
+class WordsFragment : BaseFragment<WordsFragmentBinding>(WordsFragmentBinding::inflate) {
 
-    private var _binding: WordsFragmentBinding? = null
-    private val binding get() = _binding!!
+    override fun setRecyclerView() = viewBinding.rcViewWord
 
     @Inject
     lateinit var viewModelFactory: WordsViewModelFactory
@@ -44,49 +39,26 @@ class WordsFragment : Fragment() {
         inject()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = WordsFragmentBinding.inflate(inflater, container, false)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         wordAdapter = WordsAdapter(object : ClickListener<List<UiMeaning.Base>> {
             override fun click(item: List<UiMeaning.Base>) {
                 val fragment = MeaningsFragment().apply {
                     arguments = bundleOf("meaning" to item)
                 }
-               navigator().launchFragment(fragment)
+                navigator().launchFragment(fragment)
             }
         })
+        setAdapter(wordAdapter)
 
         viewModel.observe(this, {
             it.map(wordAdapter)
         })
 
-        binding.searchBtn.setOnClickListener {
-            val text = binding.textInput.text
+        viewBinding.searchBtn.setOnClickListener {
+            val text = viewBinding.textInput.text
             viewModel.fetchWordDefinition(text.toString())
             this.hideKeyboard()
-            Toast.makeText(requireContext(), text, Toast.LENGTH_SHORT).show()
-        }
-        setupWordRecyclerView()
-        setHasOptionsMenu(true)
-
-        return binding.root
-    }
-
-    private fun setupWordRecyclerView() {
-        with(binding.rcViewWord) {
-            adapter = wordAdapter
-            layoutManager = LinearLayoutManager(requireContext())
-            setHasFixedSize(true)
-            addItemDecoration(
-                DividerItemDecoration(
-                    requireContext(),
-                    DividerItemDecoration.VERTICAL
-                )
-            )
         }
     }
 
@@ -104,10 +76,5 @@ class WordsFragment : Fragment() {
         val application = requireActivity().application as WordApp
         val appComponent = application.component
         appComponent.inject(this)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
