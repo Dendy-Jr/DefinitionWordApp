@@ -3,7 +3,6 @@ package com.dendi.android.definitionwordtestapp.core
 import android.app.Application
 import com.dendi.android.definitionwordtestapp.presentation.di.component.AppComponent
 import com.dendi.android.definitionwordtestapp.presentation.di.component.DaggerAppComponent
-import com.dendi.android.definitionwordtestapp.presentation.di.module.AppModule
 
 
 /**
@@ -17,9 +16,8 @@ class WordApp : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        component = DaggerAppComponent
-            .builder()
-            .appModule(AppModule(this))
+        component = DaggerAppComponent.builder()
+            .context(this)
             .build()
     }
 }

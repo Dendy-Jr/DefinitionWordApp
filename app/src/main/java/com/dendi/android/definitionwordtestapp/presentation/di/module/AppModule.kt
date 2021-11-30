@@ -10,10 +10,7 @@ import dagger.Provides
  * olehvynnytskyi@gmail.com
  */
 @Module(includes = [CacheModule::class, DataModule::class, DomainModule::class, UiModule::class])
-class AppModule(private val context: Context) {
-
-    @Provides
-    fun provideContext() = context
+class AppModule {
 
     @Provides
     fun provideResourceProvider(context: Context): ResourceProvider {
