@@ -1,7 +1,7 @@
 package com.dendi.android.definitionwordtestapp.presentation
 
 import com.dendi.android.definitionwordtestapp.core.Abstract
-import com.dendi.android.definitionwordtestapp.core.ClickListener
+import com.dendi.android.definitionwordtestapp.presentation.core.ClickListener
 
 /**
  * @author Dendy-Jr on 27.11.2021

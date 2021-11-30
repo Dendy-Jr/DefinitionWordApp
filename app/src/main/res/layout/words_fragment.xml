@@ -13,7 +13,7 @@
         android:layout_margin="@dimen/margin_16"
         android:hint="@string/enter_the_word"
         app:counterEnabled="true"
-        app:counterMaxLength="30"
+        app:counterMaxLength="15"
         app:endIconMode="clear_text"
         app:helperText="hello*"
         app:helperTextTextColor="#E53935">
@@ -41,6 +41,7 @@
         android:layout_gravity="bottom"
         android:layout_margin="@dimen/margin_8"
         android:text="@string/search"
+        android:fontFamily="@font/amarante"
         android:textSize="@dimen/text_size_24"
         android:textStyle="bold" />
 

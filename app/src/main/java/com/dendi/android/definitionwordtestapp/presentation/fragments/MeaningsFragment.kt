@@ -8,7 +8,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.dendi.android.definitionwordtestapp.core.ClickListener
+import com.dendi.android.definitionwordtestapp.presentation.core.ClickListener
 import com.dendi.android.definitionwordtestapp.core.navigator
 import com.dendi.android.definitionwordtestapp.databinding.MeaningsFragmentBinding
 import com.dendi.android.definitionwordtestapp.presentation.UiDefinition

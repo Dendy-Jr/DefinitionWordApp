@@ -1,4 +1,4 @@
-package com.dendi.android.definitionwordtestapp.core
+package com.dendi.android.definitionwordtestapp.presentation.core
 
 /**
  * @author Dendy-Jr on 30.11.2021

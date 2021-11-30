@@ -13,14 +13,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.dendi.android.definitionwordtestapp.core.ClickListener
+import com.dendi.android.definitionwordtestapp.presentation.core.ClickListener
 import com.dendi.android.definitionwordtestapp.core.WordApp
 import com.dendi.android.definitionwordtestapp.core.navigator
 import com.dendi.android.definitionwordtestapp.databinding.WordsFragmentBinding
 import com.dendi.android.definitionwordtestapp.presentation.UiMeaning
 import com.dendi.android.definitionwordtestapp.presentation.WordsViewModel
 import com.dendi.android.definitionwordtestapp.presentation.WordsViewModelFactory
-import com.dendi.android.definitionwordtestapp.presentation.adapter.WordAdapter
+import com.dendi.android.definitionwordtestapp.presentation.adapter.WordsAdapter
 import javax.inject.Inject
 
 /**
@@ -37,7 +37,7 @@ class WordsFragment : Fragment() {
     private val viewModel: WordsViewModel by viewModels() {
         viewModelFactory
     }
-    private lateinit var wordAdapter: WordAdapter
+    private lateinit var wordAdapter: WordsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +51,7 @@ class WordsFragment : Fragment() {
     ): View {
         _binding = WordsFragmentBinding.inflate(inflater, container, false)
 
-        wordAdapter = WordAdapter(object : ClickListener<List<UiMeaning.Base>> {
+        wordAdapter = WordsAdapter(object : ClickListener<List<UiMeaning.Base>> {
             override fun click(item: List<UiMeaning.Base>) {
                 val fragment = MeaningsFragment().apply {
                     arguments = bundleOf("meaning" to item)

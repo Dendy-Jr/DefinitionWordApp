@@ -2,7 +2,7 @@ package com.dendi.android.definitionwordtestapp.presentation
 
 import android.os.Parcelable
 import com.dendi.android.definitionwordtestapp.core.Abstract
-import com.dendi.android.definitionwordtestapp.core.ClickListener
+import com.dendi.android.definitionwordtestapp.presentation.core.ClickListener
 import kotlinx.android.parcel.Parcelize
 
 

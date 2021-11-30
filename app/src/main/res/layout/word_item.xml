@@ -5,10 +5,10 @@
     android:id="@+id/base_games"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="4dp"
     app:cardBackgroundColor="?colorSurface"
+    app:cardCornerRadius="10dp"
     app:strokeColor="#000000"
-    app:strokeWidth="1dp">
+    app:strokeWidth="2dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,17 +26,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="@string/word"
-                android:textColor="#E53935"
-                android:textSize="@dimen/text_size_16" />
+                android:fontFamily="@font/amarante"
+                android:text="@string/word" />
 
             <TextView
                 android:id="@+id/word"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_8"
+                android:fontFamily="@font/amarante"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_size_16"
                 tools:text="həˈləʊ" />
 
         </LinearLayout>
@@ -52,8 +51,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_8"
                 android:layout_marginTop="@dimen/margin_8"
+                android:fontFamily="@font/amarante"
                 android:text="@string/phonetic"
-                android:textColor="#E53935"
                 android:textSize="@dimen/text_size_16" />
 
             <TextView
@@ -61,6 +60,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_8"
+                android:fontFamily="@font/amarante"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_16"
                 tools:text="kan" />
@@ -78,9 +78,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_8"
                 android:layout_marginTop="@dimen/margin_8"
-                android:text="@string/origin"
-                android:textColor="#E53935"
-                android:textSize="@dimen/text_size_16" />
+                android:fontFamily="@font/amarante"
+                android:text="@string/origin" />
 
             <TextView
                 android:id="@+id/origin"
@@ -89,12 +88,11 @@
                 android:layout_marginStart="@dimen/margin_8"
                 android:layout_marginEnd="@dimen/margin_8"
                 android:layout_marginBottom="@dimen/margin_8"
+                android:fontFamily="@font/amarante"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_size_16"
                 tools:text="Old English dōn, of Germanic origin; related to Dutch doen and German tun, from an Indo-European root shared by Greek tithēmi ‘I place’ and Latin facere ‘make, do’" />
 
         </LinearLayout>
-
 
     </LinearLayout>
 

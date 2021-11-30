@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_8"
             android:fontFamily="@font/amarante"
-            android:text="example:" />
+            android:text="@string/example" />
 
         <TextView
             android:id="@+id/example"
@@ -70,8 +70,8 @@
             android:id="@+id/synonyms"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/margin_8"
             android:layout_marginTop="@dimen/margin_8"
+            android:layout_marginEnd="@dimen/margin_8"
             android:fontFamily="@font/amarante"
             android:textColor="@color/black"
             tools:text="together with" />
@@ -96,9 +96,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_8"
+            android:layout_marginEnd="@dimen/margin_8"
             android:fontFamily="@font/amarante"
             android:textColor="@color/black"
-            android:layout_marginEnd="@dimen/margin_8"
             tools:text="together with" />
 
     </LinearLayout>
