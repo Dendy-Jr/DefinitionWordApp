@@ -1,15 +1,14 @@
-package com.dendi.android.definitionwordtestapp.presentation.adapter
+package com.dendi.android.definitionwordtestapp.presentation.core
 
 import androidx.recyclerview.widget.DiffUtil
-import com.dendi.android.definitionwordtestapp.presentation.UiWord
 
 /**
  * @author Dendy-Jr on 28.11.2021
  * olehvynnytskyi@gmail.com
  */
-class DiffUtilCallback(
-    private val oldList: List<UiWord>,
-    private val newList: List<UiWord>
+abstract class DiffUtilCallback<T>(
+    private val oldList: List<T>,
+    private val newList: List<T>
 ) : DiffUtil.Callback() {
     override fun getOldListSize() = oldList.size
 
