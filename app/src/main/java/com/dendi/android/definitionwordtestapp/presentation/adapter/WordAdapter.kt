@@ -7,14 +7,16 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.dendi.android.definitionwordtestapp.R
 import com.dendi.android.definitionwordtestapp.core.Abstract
+import com.dendi.android.definitionwordtestapp.core.ClickListener
+import com.dendi.android.definitionwordtestapp.presentation.UiMeaning
 import com.dendi.android.definitionwordtestapp.presentation.UiWord
-import com.dendi.android.definitionwordtestapp.presentation.UiWords
 
 /**
  * @author Dendy-Jr on 27.11.2021
  * olehvynnytskyi@gmail.com
  */
-class WordAdapter : RecyclerView.Adapter<WordViewHolder>(), Abstract.ListMapper<UiWord> {
+class WordAdapter(private val listener: ClickListener<List<UiMeaning.Base>>) :
+    RecyclerView.Adapter<WordViewHolder>(), Abstract.ListMapper<UiWord> {
 
     private val words = ArrayList<UiWord>()
 
@@ -35,7 +37,7 @@ class WordAdapter : RecyclerView.Adapter<WordViewHolder>(), Abstract.ListMapper<
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WordViewHolder =
         when (viewType) {
-            0 -> WordViewHolder.Base(R.layout.word_item.makeView(parent))
+            0 -> WordViewHolder.Base(R.layout.word_item.makeView(parent), listener)
             1 -> WordViewHolder.Fail(R.layout.fail_fullscreen.makeView(parent))
             2 -> WordViewHolder.FullscreenProgress(R.layout.progress_fullscreen.makeView(parent))
             else -> throw IllegalStateException("unknown viewType $viewType")

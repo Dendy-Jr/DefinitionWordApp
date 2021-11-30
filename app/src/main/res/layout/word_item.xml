@@ -26,8 +26,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:textColor="#E53935"
                 android:text="@string/word"
+                android:textColor="#E53935"
                 android:textSize="@dimen/text_size_16" />
 
             <TextView
@@ -52,8 +52,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_8"
                 android:layout_marginTop="@dimen/margin_8"
-                android:textColor="#E53935"
                 android:text="@string/phonetic"
+                android:textColor="#E53935"
                 android:textSize="@dimen/text_size_16" />
 
             <TextView
@@ -78,8 +78,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_8"
                 android:layout_marginTop="@dimen/margin_8"
-                android:textColor="#E53935"
                 android:text="@string/origin"
+                android:textColor="#E53935"
                 android:textSize="@dimen/text_size_16" />
 
             <TextView
@@ -88,154 +88,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_8"
                 android:layout_marginEnd="@dimen/margin_8"
+                android:layout_marginBottom="@dimen/margin_8"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_16"
                 tools:text="Old English dōn, of Germanic origin; related to Dutch doen and German tun, from an Indo-European root shared by Greek tithēmi ‘I place’ and Latin facere ‘make, do’" />
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/meanings_tools"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_8"
-                android:layout_marginTop="@dimen/margin_8"
-                android:textColor="#E53935"
-                android:text="@string/meanings"
-                android:layout_gravity="center"
-                android:textSize="24sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/partOfSpeech_tools"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_8"
-                android:layout_marginTop="@dimen/margin_8"
-                android:textColor="#E53935"
-                android:text="@string/partofspeech"
-                android:textSize="@dimen/text_size_16" />
-
-            <TextView
-                android:id="@+id/partOfSpeech"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_8"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_16"
-                tools:text=" ‘sprightly’ and German keck" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/definition_tools"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#E53935"
-                android:layout_marginStart="@dimen/margin_8"
-                android:layout_marginTop="@dimen/margin_8"
-                android:text="@string/definition"
-                android:textSize="@dimen/text_size_16" />
-
-            <TextView
-                android:id="@+id/definition"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_8"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_16"
-                tools:text=" ‘sprightly’ and German keck" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/example_tools"
-                android:textColor="#E53935"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_8"
-                android:layout_marginTop="@dimen/margin_8"
-                android:text="@string/example"
-                android:textSize="@dimen/text_size_16" />
-
-            <TextView
-                android:id="@+id/example"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_8"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_16"
-                tools:text=" ‘sprightly’ and German keck" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/synonyms_tools"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_8"
-                android:textColor="#E53935"
-                android:layout_marginTop="@dimen/margin_8"
-                android:text="@string/synonyms"
-                android:textSize="@dimen/text_size_16" />
-
-            <TextView
-                android:id="@+id/synonyms"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_8"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_16"
-                tools:text=" ‘sprightly’ and German keck" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_marginBottom="@dimen/margin_8"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/antonyms_tools"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_8"
-                android:layout_marginTop="@dimen/margin_8"
-                android:textColor="#E53935"
-                android:text="@string/antonyms"
-                android:textSize="@dimen/text_size_16" />
-
-            <TextView
-                android:id="@+id/antonyms"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_8"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_16"
-                tools:text=" ‘sprightly’ and German keck" />
-        </LinearLayout>
 
     </LinearLayout>
 

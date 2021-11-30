@@ -1,4 +1,4 @@
-package com.dendi.android.definitionwordtestapp.presentation
+package com.dendi.android.definitionwordtestapp.presentation.fragments
 
 import android.app.Activity
 import android.content.Context
@@ -8,12 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.dendi.android.definitionwordtestapp.core.ClickListener
 import com.dendi.android.definitionwordtestapp.core.WordApp
+import com.dendi.android.definitionwordtestapp.core.navigator
 import com.dendi.android.definitionwordtestapp.databinding.WordsFragmentBinding
+import com.dendi.android.definitionwordtestapp.presentation.UiMeaning
+import com.dendi.android.definitionwordtestapp.presentation.WordsViewModel
+import com.dendi.android.definitionwordtestapp.presentation.WordsViewModelFactory
 import com.dendi.android.definitionwordtestapp.presentation.adapter.WordAdapter
 import javax.inject.Inject
 
@@ -31,7 +37,7 @@ class WordsFragment : Fragment() {
     private val viewModel: WordsViewModel by viewModels() {
         viewModelFactory
     }
-    private val wordAdapter by lazy { WordAdapter() }
+    private lateinit var wordAdapter: WordAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +51,15 @@ class WordsFragment : Fragment() {
     ): View {
         _binding = WordsFragmentBinding.inflate(inflater, container, false)
 
+        wordAdapter = WordAdapter(object : ClickListener<List<UiMeaning.Base>> {
+            override fun click(item: List<UiMeaning.Base>) {
+                val fragment = MeaningsFragment().apply {
+                    arguments = bundleOf("meaning" to item)
+                }
+               navigator().launchFragment(fragment)
+            }
+        })
+
         viewModel.observe(this, {
             it.map(wordAdapter)
         })
@@ -56,6 +71,7 @@ class WordsFragment : Fragment() {
             Toast.makeText(requireContext(), text, Toast.LENGTH_SHORT).show()
         }
         setupWordRecyclerView()
+        setHasOptionsMenu(true)
 
         return binding.root
     }

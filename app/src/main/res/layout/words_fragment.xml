@@ -10,20 +10,20 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:helperText="hello*"
-        app:counterEnabled="true"
-        app:endIconMode="clear_text"
-        app:counterMaxLength="30"
-        app:helperTextTextColor="#E53935"
         android:layout_margin="@dimen/margin_16"
-        android:hint="@string/enter_the_word">
+        android:hint="@string/enter_the_word"
+        app:counterEnabled="true"
+        app:counterMaxLength="30"
+        app:endIconMode="clear_text"
+        app:helperText="hello*"
+        app:helperTextTextColor="#E53935">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/textInput"
-            android:maxLines="1"
-            android:fontFamily="@font/amarante"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/amarante"
+            android:maxLines="1" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -35,13 +35,13 @@
 
     <Button
         android:id="@+id/search_btn"
+        style="?attr/materialButtonOutlinedStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:textSize="@dimen/text_size_24"
         android:layout_margin="@dimen/margin_8"
-        android:textStyle="bold"
-        style="?attr/materialButtonOutlinedStyle"
-        android:text="@string/search" />
+        android:text="@string/search"
+        android:textSize="@dimen/text_size_24"
+        android:textStyle="bold" />
 
 </LinearLayout>
