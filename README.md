@@ -1,7 +1,7 @@
 # DefinitionWordTestApp
 An application looking for a definition of any English word.
 
-Main Stack : Retrofit, Сoroutines, Room, LiveData, Mvvm, Dagger2, View binding
+Main Stack : Retrofit, Сoroutines, Room, LiveData, Mvvm, Dagger2, View binding, Navigation component
 
 SOLID,OOP,Clean architecture,JUnit tests
 
