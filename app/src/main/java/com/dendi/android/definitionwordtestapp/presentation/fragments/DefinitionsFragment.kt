@@ -2,8 +2,8 @@ package com.dendi.android.definitionwordtestapp.presentation.fragments
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.navArgs
 import com.dendi.android.definitionwordtestapp.databinding.DefinitionsFragmentBinding
-import com.dendi.android.definitionwordtestapp.presentation.UiDefinition
 import com.dendi.android.definitionwordtestapp.presentation.adapter.DefinitionAdapter
 import com.dendi.android.definitionwordtestapp.presentation.core.BaseFragment
 
@@ -14,18 +14,14 @@ import com.dendi.android.definitionwordtestapp.presentation.core.BaseFragment
 class DefinitionsFragment :
     BaseFragment<DefinitionsFragmentBinding>(DefinitionsFragmentBinding::inflate) {
 
+    private val args: DefinitionsFragmentArgs by navArgs()
+
     override fun setRecyclerView() = viewBinding.rcViewDefinitions
     private val definitionAdapter = DefinitionAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val bundle: Bundle? = this.arguments
-        if (arguments != null) {
-            val definitions = bundle!!.getParcelableArrayList<UiDefinition.Base>("definitions")
-            if (definitions != null) {
-                definitionAdapter.map(definitions)
-            }
-        }
         setAdapter(definitionAdapter)
+        definitionAdapter.map(args.definitions.toList())
     }
 }

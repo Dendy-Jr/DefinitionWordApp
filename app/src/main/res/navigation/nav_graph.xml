@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/wordsFragment">
+    <fragment
+        android:id="@+id/wordsFragment"
+        android:name="com.dendi.android.definitionwordtestapp.presentation.fragments.WordsFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/words_fragment">
+        <action
+            android:id="@+id/action_wordsFragment_to_meaningsFragment"
+            app:destination="@id/meaningsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/meaningsFragment"
+        android:name="com.dendi.android.definitionwordtestapp.presentation.fragments.MeaningsFragment"
+        android:label="Meanings"
+        tools:layout="@layout/meanings_fragment">
+        <action
+            android:id="@+id/action_meaningsFragment_to_definitionsFragment"
+            app:destination="@id/definitionsFragment" />
+        <argument
+            android:name="meanings"
+            app:argType="com.dendi.android.definitionwordtestapp.presentation.UiMeaning$Base[]" />
+    </fragment>
+    <fragment
+        android:id="@+id/definitionsFragment"
+        android:name="com.dendi.android.definitionwordtestapp.presentation.fragments.DefinitionsFragment"
+        android:label="Definitions"
+        tools:layout="@layout/definitions_fragment">
+        <argument
+            android:name="definitions"
+            app:argType="com.dendi.android.definitionwordtestapp.presentation.UiDefinition$Base[]" />
+    </fragment>
+</navigation>

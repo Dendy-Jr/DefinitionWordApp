@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".presentation.fragments.WordsFragment">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textField"
@@ -31,7 +33,8 @@
         android:id="@+id/rc_view_word"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="5" />
+        android:layout_weight="5"
+        tools:listitem="@layout/word_item" />
 
     <Button
         android:id="@+id/search_btn"
@@ -40,8 +43,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:layout_margin="@dimen/margin_8"
-        android:text="@string/search"
         android:fontFamily="@font/amarante"
+        android:text="@string/search"
         android:textSize="@dimen/text_size_24"
         android:textStyle="bold" />
 

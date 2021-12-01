@@ -5,12 +5,11 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.dendi.android.definitionwordtestapp.presentation.core.ClickListener
 import com.dendi.android.definitionwordtestapp.core.WordApp
-import com.dendi.android.definitionwordtestapp.core.navigator
 import com.dendi.android.definitionwordtestapp.databinding.WordsFragmentBinding
 import com.dendi.android.definitionwordtestapp.presentation.UiMeaning
 import com.dendi.android.definitionwordtestapp.presentation.WordsViewModel
@@ -43,10 +42,11 @@ class WordsFragment : BaseFragment<WordsFragmentBinding>(WordsFragmentBinding::i
         super.onViewCreated(view, savedInstanceState)
         wordAdapter = WordsAdapter(object : ClickListener<List<UiMeaning.Base>> {
             override fun click(item: List<UiMeaning.Base>) {
-                val fragment = MeaningsFragment().apply {
-                    arguments = bundleOf("meaning" to item)
-                }
-                navigator().launchFragment(fragment)
+
+                val directions =
+                    WordsFragmentDirections.actionWordsFragmentToMeaningsFragment(item.toTypedArray())
+
+                findNavController().navigate(directions)
             }
         })
         setAdapter(wordAdapter)
