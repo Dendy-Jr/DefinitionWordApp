@@ -8,10 +8,14 @@ import com.dendi.android.definitionwordtestapp.domain.DomainMeaning
  * @author Dendy-Jr on 27.11.2021
  * olehvynnytskyi@gmail.com
  */
-class BaseDomainMeaningMapper : Abstract.ToDomainMeaningMapper<DomainMeaning.Base> {
+class BaseDomainMeaningMapper : Abstract.ToDomainMeaningMapper {
     override fun map(
         id: Long,
         partOfSpeech: String,
-        definitions: List<DomainDefinition.Base>
-    ) = DomainMeaning.Base(id, partOfSpeech, definitions.map { it.map(BaseDomainDefinitionMapper()) })
+        definitions: List<DomainDefinition>
+    ) = DomainMeaning(
+        id = id,
+        partOfSpeech = partOfSpeech,
+        definitions = definitions
+    )
 }

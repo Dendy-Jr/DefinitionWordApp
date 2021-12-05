@@ -15,8 +15,8 @@ import com.dendi.android.definitionwordtestapp.data.cache.CacheWord
 interface WordDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(cacheWord: List<CacheWord.Base>)
+     fun insert(cacheWord: List<CacheWord>)
 
     @Query("SELECT * FROM word_table where word = :word")
-    suspend fun fetchWordDefinition(word: String): List<CacheWord.Base>
+     fun fetchWordDefinition(word: String): List<CacheWord>
 }

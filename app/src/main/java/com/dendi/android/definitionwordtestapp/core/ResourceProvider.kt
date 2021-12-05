@@ -1,6 +1,7 @@
 package com.dendi.android.definitionwordtestapp.core
 
 import android.content.Context
+import android.net.ConnectivityManager
 import androidx.annotation.StringRes
 
 /**
@@ -11,11 +12,13 @@ interface ResourceProvider {
 
     fun provideString(@StringRes id: Int): String
 
-    fun provideContext(): Context
+    fun getSystemService(): ConnectivityManager
 
     class Base(private val context: Context): ResourceProvider {
         override fun provideString(id: Int) = context.getString(id)
 
-        override fun provideContext() = context
+        override fun getSystemService(): ConnectivityManager {
+            return context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        }
     }
 }

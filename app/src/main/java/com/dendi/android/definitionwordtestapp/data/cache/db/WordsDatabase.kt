@@ -1,12 +1,11 @@
 package com.dendi.android.definitionwordtestapp.data.cache.db
 
-import android.content.Context
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.dendi.android.definitionwordtestapp.data.cache.CacheDefinition
 import com.dendi.android.definitionwordtestapp.data.cache.CacheMeaning
+import com.dendi.android.definitionwordtestapp.data.cache.CachePhonetic
 import com.dendi.android.definitionwordtestapp.data.cache.CacheWord
 
 /**
@@ -15,9 +14,10 @@ import com.dendi.android.definitionwordtestapp.data.cache.CacheWord
  */
 @Database(
     entities = [
-        CacheWord.Base::class,
-        CacheMeaning.Base::class,
-        CacheDefinition.Base::class],
+        CacheWord::class,
+        CacheMeaning::class,
+        CacheDefinition::class,
+        CachePhonetic::class],
     version = 1,
     exportSchema = false
 )
@@ -25,22 +25,4 @@ import com.dendi.android.definitionwordtestapp.data.cache.CacheWord
 abstract class WordsDatabase : RoomDatabase() {
 
     abstract fun dao(): WordDao
-
-    companion object {
-        private var instance: WordsDatabase? = null
-
-        @Synchronized
-        fun database(context: Context): WordsDatabase {
-            if (instance == null) {
-                instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    WordsDatabase::class.java,
-                    DATABASE_NAME
-                ).build()
-            }
-            return instance!!
-        }
-
-        private const val DATABASE_NAME = "words_db"
-    }
 }

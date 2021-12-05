@@ -1,8 +1,13 @@
 package com.dendi.android.definitionwordtestapp.core
 
 import android.app.Application
-import com.dendi.android.definitionwordtestapp.presentation.di.component.AppComponent
-import com.dendi.android.definitionwordtestapp.presentation.di.component.DaggerAppComponent
+import com.dendi.android.definitionwordtestapp.BuildConfig
+import com.dendi.android.definitionwordtestapp.di.*
+import com.dendi.android.definitionwordtestapp.di.module.*
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.startKoin
+import org.koin.core.logger.Level
 
 
 /**
@@ -10,14 +15,13 @@ import com.dendi.android.definitionwordtestapp.presentation.di.component.DaggerA
  * olehvynnytskyi@gmail.com
  */
 class WordApp : Application() {
-
-    lateinit var component: AppComponent
-
     override fun onCreate() {
         super.onCreate()
 
-        component = DaggerAppComponent.builder()
-            .context(this)
-            .build()
+        startKoin {
+            androidLogger(if (BuildConfig.DEBUG) Level.ERROR else Level.NONE)
+            androidContext(this@WordApp)
+            modules(listOf(appModule, uiModule, cacheModule, networkModule, dataModule, domainModule))
+        }
     }
 }

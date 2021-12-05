@@ -11,9 +11,17 @@ class BaseUiWordMapper : Abstract.UiWordMapper<UiWord> {
         id: Long,
         word: String,
         phonetic: String,
+        phonetics: List<UiPhonetic>,
         origin: String,
-        meanings: List<UiMeaning.Base>
-    ) = UiWord.Base(id, word, phonetic, origin, meanings)
+        meanings: List<UiMeaning>
+    ) = UiWord.Base(
+        id = id,
+        word = word,
+        phonetic = phonetic,
+        phonetics = phonetics,
+        origin = origin,
+        meanings = meanings
+    )
 
-    override fun map(message: String) = UiWord.Failure(message)
+    override fun map(message: String) = UiWord.Failure(message = message)
 }

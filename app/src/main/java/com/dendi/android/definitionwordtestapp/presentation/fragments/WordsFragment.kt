@@ -6,17 +6,14 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.dendi.android.definitionwordtestapp.presentation.core.ClickListener
-import com.dendi.android.definitionwordtestapp.core.WordApp
 import com.dendi.android.definitionwordtestapp.databinding.WordsFragmentBinding
 import com.dendi.android.definitionwordtestapp.presentation.UiMeaning
 import com.dendi.android.definitionwordtestapp.presentation.WordsViewModel
-import com.dendi.android.definitionwordtestapp.presentation.WordsViewModelFactory
 import com.dendi.android.definitionwordtestapp.presentation.adapter.WordsAdapter
 import com.dendi.android.definitionwordtestapp.presentation.core.BaseFragment
-import javax.inject.Inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * @author Dendy-Jr on 28.11.2021
@@ -26,29 +23,19 @@ class WordsFragment : BaseFragment<WordsFragmentBinding>(WordsFragmentBinding::i
 
     override fun setRecyclerView() = viewBinding.rcViewWord
 
-    @Inject
-    lateinit var viewModelFactory: WordsViewModelFactory
-    private val viewModel: WordsViewModel by viewModels() {
-        viewModelFactory
-    }
+    private val viewModel by viewModel<WordsViewModel>()
     private lateinit var wordAdapter: WordsAdapter
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        inject()
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        wordAdapter = WordsAdapter(object : ClickListener<List<UiMeaning.Base>> {
-            override fun click(item: List<UiMeaning.Base>) {
-
+        wordAdapter = WordsAdapter(object : ClickListener<List<UiMeaning>> {
+            override fun click(item: List<UiMeaning>) {
                 val directions =
                     WordsFragmentDirections.actionWordsFragmentToMeaningsFragment(item.toTypedArray())
-
                 findNavController().navigate(directions)
             }
         })
+
         setAdapter(wordAdapter)
 
         viewModel.observe(this, {
@@ -70,11 +57,5 @@ class WordsFragment : BaseFragment<WordsFragmentBinding>(WordsFragmentBinding::i
         val inputMethodManager =
             getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
-    }
-
-    private fun inject() {
-        val application = requireActivity().application as WordApp
-        val appComponent = application.component
-        appComponent.inject(this)
     }
 }

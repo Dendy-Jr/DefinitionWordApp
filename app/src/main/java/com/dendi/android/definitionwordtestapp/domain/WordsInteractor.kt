@@ -15,13 +15,13 @@ interface WordsInteractor {
 
     data class Base(
         private val repository: WordsRepository,
-        private val mapper: Abstract.WordsDataToDomainMapper<DomainWords>
+        private val mapper: Abstract.WordsDataToDomainMapper
     ) : WordsInteractor {
 
         override suspend fun readDataFromCloud(word: String) =
-            repository.readDataFromCloud(word).map(mapper)
+            repository.readDataFromCloud(word).mapper(mapper)
 
         override suspend fun readDataFromDb(word: String) =
-            repository.readDataFromDb(word).map(mapper)
+            repository.readDataFromDb(word).mapper(mapper)
     }
 }

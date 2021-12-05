@@ -10,5 +10,5 @@ import retrofit2.http.Path
  */
 interface WordService {
     @GET("api/v2/entries/en/{hello}")
-    suspend fun fetchWordDefinition(@Path("hello") word: String): Response<List<CloudWord.Base>>
+    suspend fun fetchWordDefinition(@Path("hello") word: String): Response<List<CloudWord>>
 }

@@ -6,12 +6,20 @@ import com.dendi.android.definitionwordtestapp.core.Abstract
  * @author Dendy-Jr on 29.11.2021
  * olehvynnytskyi@gmail.com
  */
-class BaseToCacheWordMapper : Abstract.ToCacheWordMapper<CacheWord.Base> {
+class BaseToCacheWordMapper : Abstract.ToCacheWordMapper {
     override fun map(
         id: Long,
         word: String,
         phonetic: String,
+        phonetics: List<CachePhonetic>,
         origin: String,
-        meanings: List<CacheMeaning.Base>
-    ) = CacheWord.Base(id, word, phonetic, origin, meanings)
+        meanings: List<CacheMeaning>
+    ) = CacheWord(
+        id = id,
+        word = word,
+        phonetic = phonetic,
+        phonetics = phonetics,
+        origin = origin,
+        meanings = meanings
+    )
 }

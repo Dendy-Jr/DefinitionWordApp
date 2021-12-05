@@ -16,11 +16,11 @@ interface CacheDataSource {
 
     class Base(
         private val dao: WordDao,
-        private val mapper: Abstract.ToCacheWordMapper<CacheWord.Base>
+        private val mapper: Abstract.ToCacheWordMapper
     ) : CacheDataSource {
 
         override suspend fun fetchWordDefinition(word: String) = dao.fetchWordDefinition(word)
         override suspend fun saveWord(words: List<CloudWord>) =
-            dao.insert(words.map { it.map(mapper) })
+            dao.insert(words.map { it.mapper(mapper) })
     }
 }

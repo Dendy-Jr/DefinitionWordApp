@@ -15,16 +15,16 @@ import com.dendi.android.definitionwordtestapp.presentation.core.ClickListener
  */
 abstract class MeaningViewHolder(view: View) : BaseViewHolder<UiMeaning>(view) {
 
-    class Base(view: View, private val listener: ClickListener<List<UiDefinition.Base>>) :
+    class Base(view: View, private val listener: ClickListener<List<UiDefinition>>) :
         BaseViewHolder<UiMeaning>(view) {
 
         private val partOfSpeechView = itemView.findViewById<TextView>(R.id.partOfSpeech)
         override fun bind(item: UiMeaning) {
-            item.map(object : Abstract.UiMeaningMapper<Unit> {
+            item.mapper(object : Abstract.UiMeaningMapper<Unit> {
                 override fun map(
                     id: Long,
                     partOfSpeech: String,
-                    definitions: List<UiDefinition.Base>
+                    definitions: List<UiDefinition>
                 ) {
                     partOfSpeechView.text = partOfSpeech
                 }

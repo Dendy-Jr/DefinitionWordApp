@@ -13,7 +13,7 @@ import com.dendi.android.definitionwordtestapp.presentation.core.DiffUtilCallbac
  * @author Dendy-Jr on 30.11.2021
  * olehvynnytskyi@gmail.com
  */
-class MeaningAdapter(private val listener: ClickListener<List<UiDefinition.Base>>) :
+class MeaningAdapter(private val listener: ClickListener<List<UiDefinition>>) :
     BaseAdapter<UiMeaning, BaseViewHolder<UiMeaning>>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =

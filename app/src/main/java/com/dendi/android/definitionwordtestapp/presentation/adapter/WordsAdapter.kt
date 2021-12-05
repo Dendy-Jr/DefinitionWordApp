@@ -13,18 +13,21 @@ import com.dendi.android.definitionwordtestapp.presentation.core.DiffUtilCallbac
  * @author Dendy-Jr on 27.11.2021
  * olehvynnytskyi@gmail.com
  */
-class WordsAdapter(private val listener: ClickListener<List<UiMeaning.Base>>) :
-    BaseAdapter<UiWord, BaseViewHolder<UiWord>>() {
+class WordsAdapter(
+    private val listenerMeaning: ClickListener<List<UiMeaning>>,
+) : BaseAdapter<UiWord, BaseViewHolder<UiWord>>() {
 
     override fun getItemViewType(position: Int) = when (list[position]) {
         is UiWord.Base -> 0
         is UiWord.Failure -> 1
         is UiWord.Progress -> 2
-        else -> 3
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = when (viewType) {
-        0 -> WordsViewHolder.Base(R.layout.word_item.makeView(parent), listener)
+        0 -> WordsViewHolder.Base(
+            R.layout.word_item.makeView(parent),
+            listenerMeaning,
+        )
         1 -> WordsViewHolder.Fail(R.layout.fail_fullscreen.makeView(parent))
         2 -> BaseViewHolder.FullScreenProgress(R.layout.progress_fullscreen.makeView(parent))
         else -> throw IllegalStateException("unknown viewType $viewType")

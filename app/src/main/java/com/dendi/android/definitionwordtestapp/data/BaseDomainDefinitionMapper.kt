@@ -7,12 +7,18 @@ import com.dendi.android.definitionwordtestapp.domain.DomainDefinition
  * @author Dendy-Jr on 27.11.2021
  * olehvynnytskyi@gmail.com
  */
-class BaseDomainDefinitionMapper : Abstract.DefinitionMapper<DomainDefinition.Base> {
+class BaseDomainDefinitionMapper : Abstract.DefinitionMapper<DomainDefinition> {
     override fun map(
         id: Long,
         antonyms: List<Any>,
         definition: String,
         example: String,
         synonyms: List<String>
-    ) = DomainDefinition.Base(id, antonyms, definition, example, synonyms)
+    ) = DomainDefinition(
+        id = id,
+        antonyms = antonyms,
+        definition = definition,
+        example = example,
+        synonyms = synonyms
+    )
 }

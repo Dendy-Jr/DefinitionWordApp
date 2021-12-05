@@ -21,7 +21,7 @@ abstract class DefinitionViewHolder(view: View) : BaseViewHolder<UiDefinition>(v
         private val synonymsView = itemView.findViewById<TextView>(R.id.synonyms)
 
         override fun bind(item: UiDefinition) {
-            item.map(object : Abstract.DefinitionMapper<Unit> {
+            item.mapper(object : Abstract.DefinitionMapper<Unit> {
                 override fun map(
                     id: Long,
                     antonyms: List<Any>,

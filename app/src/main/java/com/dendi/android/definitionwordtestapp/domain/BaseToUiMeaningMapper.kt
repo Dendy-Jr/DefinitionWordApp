@@ -8,10 +8,10 @@ import com.dendi.android.definitionwordtestapp.presentation.UiMeaning
  * @author Dendy-Jr on 27.11.2021
  * olehvynnytskyi@gmail.com
  */
-class BaseToUiMeaningMapper : Abstract.UiMeaningMapper<UiMeaning.Base> {
+class BaseToUiMeaningMapper : Abstract.UiMeaningMapper<UiMeaning> {
     override fun map(
         id: Long,
         partOfSpeech: String,
-        definitions: List<UiDefinition.Base>
-    ) = UiMeaning.Base(id, partOfSpeech, definitions)
+        definitions: List<UiDefinition>
+    ) = UiMeaning(id = id, partOfSpeech = partOfSpeech, definitions = definitions)
 }

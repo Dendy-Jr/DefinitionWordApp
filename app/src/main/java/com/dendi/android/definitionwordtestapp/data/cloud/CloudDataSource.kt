@@ -7,7 +7,7 @@ package com.dendi.android.definitionwordtestapp.data.cloud
 
 interface CloudDataSource {
 
-    suspend fun fetchWordDefinition(word: String): List<CloudWord.Base>
+    suspend fun fetchWordDefinition(word: String): List<CloudWord>
 
     class Base(private val service: WordService) : CloudDataSource {
         override suspend fun fetchWordDefinition(word: String) =

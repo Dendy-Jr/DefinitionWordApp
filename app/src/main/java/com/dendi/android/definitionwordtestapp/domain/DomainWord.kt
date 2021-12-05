@@ -1,29 +1,28 @@
 package com.dendi.android.definitionwordtestapp.domain
 
 import com.dendi.android.definitionwordtestapp.core.Abstract
+import com.dendi.android.definitionwordtestapp.presentation.UiWord
 
 
 /**
  * @author Dendy-Jr on 27.11.2021
  * olehvynnytskyi@gmail.com
  */
-interface DomainWord {
 
-    fun <T> map(mapper: Abstract.UiWordMapper<T>): T
-
-    data class Base(
-        private val id: Long,
-        private val word: String,
-        private val phonetic: String,
-        private val origin: String,
-        private val meanings: List<DomainMeaning.Base>
-    ) : DomainWord {
-        override fun <T> map(mapper: Abstract.UiWordMapper<T>): T = mapper.map(
-            id,
-            word,
-            phonetic,
-            origin,
-            meanings.map { it.map(BaseToUiMeaningMapper()) }
-        )
-    }
+data class DomainWord(
+    private val id: Long,
+    private val word: String,
+    private val phonetic: String,
+    private val phonetics: List<DomainPhonetic>,
+    private val origin: String,
+    private val meanings: List<DomainMeaning>
+) : Abstract.Object<UiWord, Abstract.UiWordMapper<UiWord>> {
+    override fun mapper(mapper: Abstract.UiWordMapper<UiWord>) = mapper.map(
+        id = id,
+        word = word,
+        phonetic = phonetic,
+        phonetics = phonetics.map { it.mapper(BaseUiPhoneticMapper()) },
+        origin = origin,
+        meanings = meanings.map { it.mapper(BaseToUiMeaningMapper()) }
+    )
 }

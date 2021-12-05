@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DefinitionWordTestApp</string>
+    <string name="app_name">DefinitionWordApp</string>
     <string name="please_wait">Please Wait…</string>
     <string name="loading_progress">Loading…</string>
     <string name="no_connection_message">No connection</string>
@@ -17,4 +17,8 @@
     <string name="synonyms">synonyms:</string>
     <string name="antonyms">antonyms:</string>
     <string name="search">Search</string>
+    <string name="text">text</string>
+    <string name="audio">audio</string>
+    <string name="play_phonetics">Play phonetics</string>
+    <string name="phonetics">phonetics</string>
 </resources>

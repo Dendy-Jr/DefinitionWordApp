@@ -24,8 +24,8 @@ class MeaningsFragment : BaseFragment<MeaningsFragmentBinding>(MeaningsFragmentB
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        meaningAdapter = MeaningAdapter(object : ClickListener<List<UiDefinition.Base>> {
-            override fun click(item: List<UiDefinition.Base>) {
+        meaningAdapter = MeaningAdapter(object : ClickListener<List<UiDefinition>> {
+            override fun click(item: List<UiDefinition>) {
                 val directions =
                     MeaningsFragmentDirections.actionMeaningsFragmentToDefinitionsFragment(item.toTypedArray())
                 findNavController().navigate(directions)
