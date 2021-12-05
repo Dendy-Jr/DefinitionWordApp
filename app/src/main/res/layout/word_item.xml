@@ -5,8 +5,8 @@
     android:id="@+id/base_games"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="?colorSurface"
     android:layout_margin="5dp"
+    app:cardBackgroundColor="?colorSurface"
     app:cardCornerRadius="10dp"
     app:strokeColor="#000000"
     app:strokeWidth="2dp">
@@ -83,10 +83,25 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_8"
                 android:layout_marginEnd="@dimen/margin_8"
-                android:layout_marginBottom="@dimen/margin_8"
                 android:textColor="@color/black"
                 tools:text="Old English dōn, of Germanic origin; related to Dutch doen and German tun, from an Indo-European root shared by Greek tithēmi ‘I place’ and Latin facere ‘make, do’" />
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/play_phonetics"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_8"
+                android:fontFamily="@font/amarante"
+                android:text="@string/phonetics"
+                android:textStyle="bold" />
         </LinearLayout>
 
     </LinearLayout>

@@ -7,33 +7,39 @@ import com.dendi.android.definitionwordtestapp.presentation.core.ClickListener
  * @author Dendy-Jr on 27.11.2021
  * olehvynnytskyi@gmail.com
  */
-interface UiWord {
+sealed class UiWord : Abstract.Object<Unit, Abstract.UiWordMapper<Unit>> {
 
-    fun <T> map(mapper: Abstract.UiWordMapper<T>): T =
-        mapper.map(0, "", "", "", listOf())
+    override fun mapper(mapper: Abstract.UiWordMapper<Unit>) =
+        mapper.map(0, "", "", listOf(), "", listOf())
 
-    fun map(listener: ClickListener<List<UiMeaning.Base>>) = Unit
+    open fun mapMeaning(listener: ClickListener<List<UiMeaning>>) = Unit
 
-    object Progress : UiWord
+    open fun mapPhonetic(listener: ClickListener<List<UiPhonetic>>) = Unit
+
+    object Progress : UiWord()
 
     data class Base(
         private val id: Long,
         private val word: String,
         private val phonetic: String,
+        private val phonetics: List<UiPhonetic>,
         private val origin: String,
-        private val meanings: List<UiMeaning.Base>
-    ) : UiWord {
-        override fun <T> map(mapper: Abstract.UiWordMapper<T>) = mapper.map(
-            id, word, phonetic, origin, meanings
+        private val meanings: List<UiMeaning>
+    ) : UiWord() {
+        override fun mapper(mapper: Abstract.UiWordMapper<Unit>) = mapper.map(
+            id, word, phonetic, phonetics, origin, meanings
         )
 
-        override fun map(listener: ClickListener<List<UiMeaning.Base>>) {
+        override fun mapMeaning(listener: ClickListener<List<UiMeaning>>) {
             listener.click(meanings)
         }
+
+        override fun mapPhonetic(listener: ClickListener<List<UiPhonetic>>) =
+            listener.click(phonetics)
     }
 
-    data class Failure(private val message: String) : UiWord {
-        override fun <T> map(mapper: Abstract.UiWordMapper<T>) =
+    data class Failure(private val message: String) : UiWord() {
+        override fun mapper(mapper: Abstract.UiWordMapper<Unit>) =
             mapper.map(message)
     }
 }

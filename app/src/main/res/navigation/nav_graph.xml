@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_wordsFragment_to_meaningsFragment"
             app:destination="@id/meaningsFragment" />
+        <action
+            android:id="@+id/action_wordsFragment_to_phoneticsFragment"
+            app:destination="@id/phoneticsFragment" />
     </fragment>
     <fragment
         android:id="@+id/meaningsFragment"
@@ -23,7 +26,7 @@
             app:destination="@id/definitionsFragment" />
         <argument
             android:name="meanings"
-            app:argType="com.dendi.android.definitionwordtestapp.presentation.UiMeaning$Base[]" />
+            app:argType="com.dendi.android.definitionwordtestapp.presentation.UiMeaning[]" />
     </fragment>
     <fragment
         android:id="@+id/definitionsFragment"
@@ -32,6 +35,15 @@
         tools:layout="@layout/definitions_fragment">
         <argument
             android:name="definitions"
-            app:argType="com.dendi.android.definitionwordtestapp.presentation.UiDefinition$Base[]" />
+            app:argType="com.dendi.android.definitionwordtestapp.presentation.UiDefinition[]" />
+    </fragment>
+    <fragment
+        android:id="@+id/phoneticsFragment"
+        android:name="com.dendi.android.definitionwordtestapp.presentation.fragments.PhoneticsFragment"
+        android:label="Phonetics"
+        tools:layout="@layout/phonetic_item">
+        <argument
+            android:name="phonetic"
+            app:argType="com.dendi.android.definitionwordtestapp.presentation.UiPhonetic[]" />
     </fragment>
 </navigation>

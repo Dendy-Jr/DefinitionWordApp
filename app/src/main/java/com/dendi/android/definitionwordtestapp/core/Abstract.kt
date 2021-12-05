@@ -2,17 +2,14 @@ package com.dendi.android.definitionwordtestapp.core
 
 import com.dendi.android.definitionwordtestapp.data.DataDefinition
 import com.dendi.android.definitionwordtestapp.data.DataMeaning
+import com.dendi.android.definitionwordtestapp.data.DataPhonetic
 import com.dendi.android.definitionwordtestapp.data.DataWord
 import com.dendi.android.definitionwordtestapp.data.cache.CacheDefinition
 import com.dendi.android.definitionwordtestapp.data.cache.CacheMeaning
-import com.dendi.android.definitionwordtestapp.domain.DomainDefinition
-import com.dendi.android.definitionwordtestapp.domain.DomainMeaning
-import com.dendi.android.definitionwordtestapp.domain.DomainWord
-import com.dendi.android.definitionwordtestapp.domain.DomainWords
-import com.dendi.android.definitionwordtestapp.presentation.UiDefinition
-import com.dendi.android.definitionwordtestapp.presentation.UiMeaning
-import com.dendi.android.definitionwordtestapp.presentation.UiWord
-import com.dendi.android.definitionwordtestapp.presentation.UiWords
+import com.dendi.android.definitionwordtestapp.data.cache.CachePhonetic
+import com.dendi.android.definitionwordtestapp.data.cache.CacheWord
+import com.dendi.android.definitionwordtestapp.domain.*
+import com.dendi.android.definitionwordtestapp.presentation.*
 
 
 /**
@@ -21,34 +18,41 @@ import com.dendi.android.definitionwordtestapp.presentation.UiWords
  */
 interface Abstract {
 
-    interface ToCacheWordMapper<T> : Mapper {
-        fun map(
-            id: Long,
-            word: String,
-            phonetic: String,
-            origin: String,
-            meanings: List<CacheMeaning.Base>
-        ): T
+    interface Object<R, M: Mapper> {
+        fun mapper(mapper: M): R
     }
 
-    interface ToDataWordMapper<T> : Mapper {
+    interface ToCacheWordMapper : Mapper {
         fun map(
             id: Long,
             word: String,
             phonetic: String,
+            phonetics: List<CachePhonetic>,
             origin: String,
-            meanings: List<DataMeaning.Base>
-        ): T
+            meanings: List<CacheMeaning>
+        ): CacheWord
     }
 
-    interface ToDomainWordMapper<T> : Mapper {
+    interface ToDataWordMapper : Mapper {
         fun map(
             id: Long,
             word: String,
             phonetic: String,
+            phonetics: List<DataPhonetic>,
             origin: String,
-            meanings: List<DomainMeaning.Base>
-        ): T
+            meanings: List<DataMeaning>
+        ): DataWord
+    }
+
+    interface ToDomainWordMapper : Mapper {
+        fun map(
+            id: Long,
+            word: String,
+            phonetic: String,
+            phonetics: List<DomainPhonetic>,
+            origin: String,
+            meanings: List<DomainMeaning>
+        ): DomainWord
     }
 
     interface UiWordMapper<T> : Mapper {
@@ -56,27 +60,40 @@ interface Abstract {
             id: Long,
             word: String,
             phonetic: String,
+            phonetics: List<UiPhonetic>,
             origin: String,
-            meanings: List<UiMeaning.Base>
+            meanings: List<UiMeaning>
         ): T
 
         fun map(message: String): T
     }
 
-    interface ToCacheMeaningMapper<T> : Mapper {
-        fun map(id: Long, partOfSpeech: String, definitions: List<CacheDefinition.Base>): T
+    interface PhoneticMapper<T> : Mapper {
+        fun map(id: Long, audio: String, text: String): T
     }
 
-    interface ToDataMeaningMapper<T> : Mapper {
-        fun map(id: Long, partOfSpeech: String, definitions: List<DataDefinition.Base>): T
+    interface ToCacheMeaningMapper : Mapper {
+        fun map(
+            id: Long,
+            partOfSpeech: String,
+            definitions: List<CacheDefinition>
+        ): CacheMeaning
     }
 
-    interface ToDomainMeaningMapper<T> : Mapper {
-        fun map(id: Long, partOfSpeech: String, definitions: List<DomainDefinition.Base>): T
+    interface ToDataMeaningMapper : Mapper {
+        fun map(id: Long, partOfSpeech: String, definitions: List<DataDefinition>): DataMeaning
+    }
+
+    interface ToDomainMeaningMapper : Mapper {
+        fun map(
+            id: Long,
+            partOfSpeech: String,
+            definitions: List<DomainDefinition>
+        ): DomainMeaning
     }
 
     interface UiMeaningMapper<T> : Mapper {
-        fun map(id: Long, partOfSpeech: String, definitions: List<UiDefinition.Base>): T
+        fun map(id: Long, partOfSpeech: String, definitions: List<UiDefinition>): T
     }
 
     interface DefinitionMapper<T> : Mapper {
@@ -89,30 +106,29 @@ interface Abstract {
         ): T
     }
 
-    interface WordsDataToDomainMapper<T> : Mapper {
-        fun map(words: List<DataWord>): T
-        fun map(message: String): T
+    interface WordsDataToDomainMapper : Mapper {
+        fun map(words: List<DataWord>): DomainWords
+        fun map(message: String): DomainWords
 
-        class Base(private val mapper: ToDomainWordMapper<DomainWord>) :
-            WordsDataToDomainMapper<DomainWords> {
-            override fun map(words: List<DataWord>): DomainWords {
-                return DomainWords.Success(words.map { it.map(mapper) })
-            }
+        class Base(private val mapper: ToDomainWordMapper) :
+            WordsDataToDomainMapper {
+            override fun map(words: List<DataWord>) =
+                DomainWords.Success(words.map { it.mapper(mapper) })
 
-            override fun map(message: String): DomainWords {
-                return DomainWords.Failure(message)
-            }
+
+            override fun map(message: String) =
+                DomainWords.Failure(message)
         }
     }
 
-    interface WordsDomainToUiMapper<T> : Mapper {
-        fun map(words: List<DomainWord>): T
-        fun map(message: String): T
+    interface WordsDomainToUiMapper : Mapper {
+        fun map(words: List<DomainWord>): UiWords
+        fun map(message: String): UiWords
 
         class Base(private val mapper: UiWordMapper<UiWord>) :
-            WordsDomainToUiMapper<UiWords> {
-            override fun map(words: List<DomainWord>): UiWords =
-                UiWords.Base(words.map { it.map(mapper) })
+            WordsDomainToUiMapper {
+            override fun map(words: List<DomainWord>) =
+                UiWords.Base(words.map { it.mapper(mapper) })
 
             override fun map(message: String) =
                 UiWords.Base(listOf(UiWord.Failure(message)))
