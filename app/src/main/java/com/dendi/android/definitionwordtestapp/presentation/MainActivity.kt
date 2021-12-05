@@ -7,7 +7,6 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.dendi.android.definitionwordtestapp.R
-import com.dendi.android.definitionwordtestapp.core.WordApp
 import com.dendi.android.definitionwordtestapp.databinding.ActivityMainBinding
 
 /**
@@ -25,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        inject()
+
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
@@ -35,13 +34,6 @@ class MainActivity : AppCompatActivity() {
         navController = navHost.navController
 
         NavigationUI.setupActionBarWithNavController(this, navController)
-    }
-
-    private fun AppCompatActivity.inject() {
-        val application = this.application
-        if (application is WordApp) {
-            application.component.inject(this@MainActivity)
-        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

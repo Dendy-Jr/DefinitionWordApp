@@ -1,39 +1,34 @@
-package com.dendi.android.definitionwordtestapp.presentation.di.module
+package com.dendi.android.definitionwordtestapp.di.module
 
 import com.dendi.android.definitionwordtestapp.data.cloud.CloudDataSource
 import com.dendi.android.definitionwordtestapp.data.cloud.WordService
-import dagger.Module
-import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 /**
- * @author Dendy-Jr on 27.11.2021
+ * @author Dendy-Jr on 03.12.2021
  * olehvynnytskyi@gmail.com
  */
-@Module
-class NetworkModule {
 
-    private companion object {
-        private const val BASE_URL = "https://api.dictionaryapi.dev/"
-    }
+private const val BASE_URL = "https://api.dictionaryapi.dev/"
 
-    @Provides
-    fun provideClient(): OkHttpClient {
-        return OkHttpClient.Builder()
+val networkModule = module {
+
+    factory<OkHttpClient> {
+        OkHttpClient.Builder()
             .addInterceptor(HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BODY
-            })
-            .build()
+            }).build()
     }
 
-    @Provides
-    fun provideGson(): GsonConverterFactory = GsonConverterFactory.create()
+    factory<GsonConverterFactory> {
+        GsonConverterFactory.create()
+    }
 
-    @Provides
-    fun provideRetrofit(
+    fun getRetrofit(
         client: OkHttpClient,
         gsonConverterFactory: GsonConverterFactory
     ): Retrofit {
@@ -44,14 +39,15 @@ class NetworkModule {
             .build()
     }
 
-    @Provides
-    fun provideWordService(retrofit: Retrofit): WordService {
+    factory { getRetrofit(get(), get()) }
+
+    fun getWordServices(retrofit: Retrofit): WordService {
         return retrofit.create(WordService::class.java)
     }
 
-    @Provides
-    fun provideBaseCloudDataSource(service: WordService): CloudDataSource {
-        return CloudDataSource.Base(service)
-    }
+    factory { getWordServices(get()) }
 
+    factory<CloudDataSource> {
+        CloudDataSource.Base(get())
+    }
 }
