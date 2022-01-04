@@ -12,15 +12,16 @@ import org.junit.Test
 class WordsDataToDomainTest {
 
     private val mapperDomain =
-        Abstract.WordsDataToDomainMapper.Base(object : Abstract.ToDomainWordMapper<DomainWord> {
+        Abstract.WordsDataToDomainMapper.Base(object : Abstract.ToDomainWordMapper {
             override fun map(
                 id: Long,
                 word: String,
                 phonetic: String,
+                phonetics: List<DomainPhonetic>,
                 origin: String,
-                meanings: List<DomainMeaning.Base>
+                meanings: List<DomainMeaning>
             ): DomainWord {
-                return DomainWord.Base(id, word, phonetic, origin, meanings)
+                return DomainWord(id, word, phonetic, phonetics, origin, meanings)
             }
         })
 
@@ -28,14 +29,14 @@ class WordsDataToDomainTest {
     fun test_success() {
         val actual = mapperDomain.map(
             listOf(
-                DataWord.Base(1, "hello", "həˈləʊ", "exclamation", listOf()),
-                DataWord.Base(2, "hello2", "həˈləʊ2", "exclamation2", listOf())
+                DataWord(1, "hello", "həˈləʊ", listOf(), "exclamation", listOf()),
+                DataWord(2, "hello2", "həˈləʊ2", listOf(), "exclamation2", listOf())
             )
         )
 
         val data = listOf(
-            DomainWord.Base(1, "hello", "həˈləʊ", "exclamation", listOf()),
-            DomainWord.Base(2, "hello2", "həˈləʊ2", "exclamation2", listOf())
+            DomainWord(1, "hello", "həˈləʊ", listOf(), "exclamation", listOf()),
+            DomainWord(2, "hello2", "həˈləʊ2", listOf(), "exclamation2", listOf())
         )
 
         val expected = DomainWords.Success(data)

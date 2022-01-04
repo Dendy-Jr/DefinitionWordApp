@@ -31,10 +31,10 @@ class WordsViewModel(
         viewModelScope.launch(Dispatchers.IO) {
             val resultUi: UiWords =
                 if (checkInternetConnection(resourceProvider.getSystemService())) {
-                    val resultDomain = interactor.readDataFromCloud(srsWord)
+                    val resultDomain = interactor.readOnlineData(srsWord)
                     resultDomain.mapper(mapper)
                 } else {
-                    val resultDomain = interactor.readDataFromDb(srsWord)
+                    val resultDomain = interactor.readOfflineData(srsWord)
                     resultDomain.mapper(mapper)
                 }
             withContext(Dispatchers.Main) {
